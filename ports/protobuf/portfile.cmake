@@ -2,19 +2,10 @@ include(vcpkg_common_functions)
 
 set(PROTOBUF_VERSION 3.9.1)
 
-vcpkg_download_distfile(ARCHIVE
-    URLS "https://github.com/protocolbuffers/protobuf/archive/v${PROTOBUF_VERSION}.zip"
-    FILENAME "protobuf-${PROTOBUF_VERSION}.zip"
-    SHA512 0e5f6eb655523e43b4788a23d2486acf703f5a4319b45ca393daaacd638c86e833b955c31736088a4ca55b64d534fdfc717455ac96704c8b8d0be85dda1dc075
-)
-
-vcpkg_extract_source_archive_ex(
+vcpkg_from_git(
     OUT_SOURCE_PATH SOURCE_PATH
-    ARCHIVE ${ARCHIVE}
-    REF ${PROTOBUF_VERSION}
-    PATCHES
-        fix-uwp.patch
-        ${ADDITIONAL_PATCH}
+    URL https://github.com/protocolbuffers/protobuf
+    REF 655310ca192a6e3a050e0ca0b7084a2968072260
 )
 
 if(CMAKE_HOST_WIN32 AND NOT VCPKG_TARGET_ARCHITECTURE MATCHES "x64" AND NOT VCPKG_TARGET_ARCHITECTURE MATCHES "x86")
