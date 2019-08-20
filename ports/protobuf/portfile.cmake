@@ -1,11 +1,16 @@
 include(vcpkg_common_functions)
 
-vcpkg_from_github(
-    OUT_SOURCE_PATH SOURCE_PATH
-    REPO protocolbuffers/protobuf
-    REF v3.9.1
+vcpkg_download_distfile(ARCHIVE
+    URLS "https://github.com/protocolbuffers/protobuf/archive/v3.9.1.tar.gz"
+    FILENAME "protocolbuffers-protobuf-v3.9.1.tar.gz"
     SHA512 bc2d66eae4bb01d15d477cc7adcac17414f8c345052f66098b6ffcda75a1cbd412fc17c874c87138c9ece97be8ee641c36a5598509d7ebb6c3f1473347b8dd7a
-    HEAD_REF master
+)
+
+vcpkg_extract_source_archive_ex(
+    OUT_SOURCE_PATH SOURCE_PATH
+    ARCHIVE ${ARCHIVE}
+    NO_REMOVE_ONE_LEVEL
+    REF v3.9.1
     PATCHES
         fix-uwp.patch
 )
